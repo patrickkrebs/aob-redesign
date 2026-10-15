@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AOB Redesign Brief</title>
+<link rel="preconnect" href="https://use.typekit.net" crossorigin>
+<link rel="stylesheet" href="https://use.typekit.net/fak8qxo.css">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .brief-hero { padding-block: clamp(150px, 16vw, 220px) clamp(56px, 7vw, 96px); border-bottom: 1px solid var(--line); }
+  .brief-hero .lede { max-width: 40ch; margin-top: 28px; color: var(--ink-soft); }
+  .brief-nav { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 40px; }
+  .audit { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .audit th { text-align: left; font: 500 10.5px/1.4 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft); padding: 0 24px 14px 0; border-bottom: 1px solid var(--ink); }
+  .audit td { vertical-align: top; padding: 20px 24px 20px 0; border-bottom: 1px solid var(--line); }
+  .audit td:first-child { font: 400 19px/1.3 var(--display); width: 18%; }
+  .audit td:nth-child(2) { color: var(--ink-soft); width: 38%; }
+  .table-scroll { overflow-x: auto; }
+  .table-scroll .audit { min-width: 720px; }
+  .bench { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(32px, 5vw, 80px); }
+  .bm { display: grid; grid-template-columns: 3.2em minmax(0, 1fr); gap: 4px 18px; padding-block: 28px; border-top: 1px solid var(--line); }
+  .bm__w { grid-row: span 3; font: 400 34px/1 var(--display); font-variant-numeric: tabular-nums; }
+  .bm__w small { font: 500 10px/1 var(--sans); letter-spacing: .1em; color: var(--ink-soft); }
+  .bm__name { font: 400 22px/1.2 var(--display); display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+  .bm__name span { font: 500 10px/1.4 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft); }
+  .bm__bar { height: 3px; background: var(--stone); margin: 10px 0 12px; }
+  .bm__bar i { display: block; height: 100%; background: var(--bronze); }
+  .bm p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+  .bm p b { color: var(--ink); font-weight: 500; }
+  .weights { display: flex; height: 44px; margin-top: 8px; border: 1px solid var(--line); }
+  .weights div { display: flex; align-items: center; justify-content: center; font: 500 9.5px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); border-right: 1px solid var(--paper); overflow: hidden; white-space: nowrap; min-width: 0; }
+  .weights div:last-child { border-right: 0; }
+  .swatches { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
+  .sw__chip { aspect-ratio: 1; border: 1px solid var(--line); }
+  .sw__name { font: 400 18px/1.2 var(--display); margin-top: 14px; }
+  .sw__hex { font: 500 10px/1.6 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
+  .sw__use { font: italic 400 14px/1.45 var(--serif); color: var(--ink-soft); margin-top: 6px; }
+  .type-spec { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 64px); margin-top: clamp(56px, 7vw, 96px); }
+  .type-spec > div { border-top: 1px solid var(--ink); padding-top: 22px; min-width: 0; }
+  .type-spec .sample { margin: 18px 0 14px; }
+  .sitemap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+  .sitemap div { border-top: 1px solid var(--ink); padding-top: 20px; min-width: 0; }
+  .sitemap ul { list-style: none; padding: 0; margin: 12px 0 0; color: var(--ink-soft); font-size: 15px; display: grid; gap: 6px; }
+  .needs { list-style: none; padding: 0; margin: 0; counter-reset: n; }
+  .needs li { counter-increment: n; display: grid; grid-template-columns: 3em minmax(0, 1fr); gap: 16px; padding-block: 18px; border-top: 1px solid var(--line); }
+  .needs li::before { content: counter(n, decimal-leading-zero); font: italic 400 15px/1.7 var(--serif); color: var(--bronze); }
+  .needs b { font-weight: 500; }
+  @media (max-width: 900px) {
+    .bench { grid-template-columns: 1fr; }
+    .swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .type-spec, .sitemap { grid-template-columns: 1fr 1fr; }
+    .weights div { font-size: 0; }
+  }
+  @media (max-width: 560px) {
+    .swatches, .type-spec, .sitemap { grid-template-columns: 1fr 1fr; }
+    .type-spec { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header site-header--solid">
+  <div class="site-header__bar">
+    <a class="wordmark" href="index.html"><span class="wordmark__name">Aubrey O’Brien</span><span class="wordmark__sub">Redesign Brief</span></a>
+    <nav class="nav nav--right" aria-label="Brief">
+      <a href="#benchmarks">Benchmarks</a><a href="#system">System</a><a href="autocamp-cape-cod.html">Case study</a><a class="nav-cta" href="index.html">Homepage</a>
+    </nav>
+    <a class="menu-toggle" href="index.html">Homepage</a>
+  </div>
+</header>
+
+<main>
+  <section class="wrap brief-hero">
+    <p class="eyebrow">Redesign concept · October 2026</p>
+    <h1 class="display" style="max-width:16ch;margin-top:22px">From a template to a <em>principal’s studio.</em></h1>
+    <p class="lede">Aubrey’s credentials are first rate: Disney under Wing Chao, an Interior Design award, the Wall Street Journal and the St. Regis. The current site presents them like a starter template. This brief explains what changed and where each decision came from.</p>
+    <div class="brief-nav">
+      <a class="link" href="index.html">View the homepage</a>
+      <a class="link" href="autocamp-cape-cod.html">View the case study</a>
+    </div>
+  </section>
+
+  <!-- Audit -->
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">01 · Audit</p><h2 class="h2">What the current site <em>gets wrong</em></h2></div></div>
+      <div class="table-scroll">
+        <table class="audit">
+          <thead><tr><th>Area</th><th>Today on aubreyobrien.com</th><th>In the redesign</th></tr></thead>
+          <tbody>
+            <tr><td>First impression</td><td>Headshot and “Aubrey O’Brien, Interior Designer” in default Helvetica. On mobile, no room is visible above the fold.</td><td>One full-bleed Sarasota living room, the studio line “Design for a life well lived,” and a centered wordmark.</td></tr>
+            <tr><td>Brand</td><td>No logo in the header; a faint grey wordmark only in the footer; default Wix favicon.</td><td>An italic “AOB” monogram in a header that inverts over photos, the full name at billboard scale in the hero and footer, and a lagoon teal taken from her own studio.</td></tr>
+            <tr><td>Typography</td><td>Helvetica Roman at one weight, 13–14px body text in brown.</td><td>Freight Big Pro Light for headlines, Freight Text italic for captions, Neue Haas Unica for body and labels, all from Adobe Fonts.</td></tr>
+            <tr><td>Portfolio</td><td>Galleries with no words. Template slugs such as <i>villa-kanso</i> for Autocamp. St. Regis led by a gift box, not a room.</td><td>An off-grid collage of four, a filterable index with a cursor-following preview of all six, and full case studies with a spec strip, story, captions and credits.</td></tr>
+            <tr><td>Services &amp; process</td><td>None. /services returns a 404.</td><td>Five services and a four-phase process with typical durations.</td></tr>
+            <tr><td>Trust</td><td>Four press logos with no links. Award and Florida Design mentions hidden in small captions. No testimonials.</td><td>Press tied to the projects featured, the award on the Autocamp tile and panel, credential chips, a list of locations served.</td></tr>
+            <tr><td>Conversion</td><td>One generic form (name, email, message). No CTA on project pages. No phone or response time.</td><td>A four-step inquiry that qualifies scope, location, both budgets, architect and timing, with a stated two-day reply. A CTA on every page.</td></tr>
+            <tr><td>Housekeeping</td><td>Typo on the homepage (“inteiors”), nav overlap at 1024px, unedited Wix privacy and accessibility pages, no meta descriptions.</td><td>Copy corrected, responsive header with a full-screen mobile menu, meta descriptions written, legal pages flagged for rewrite.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benchmarks -->
+  <section class="section section--stone" id="benchmarks">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="eyebrow">02 · The aesthetic calculation</p><h2 class="h2">Ten leaders, <em>weighted.</em></h2></div>
+        <p class="italic-note" style="max-width:40ch;margin:0">Each site was read live for type, color, layout, imagery and inquiry flow. Weights show how much of the final design each one contributed.</p>
+      </div>
+
+      <div class="weights" aria-hidden="true">
+        <div style="flex:16;background:var(--lagoon);color:var(--on-dark)">RH</div>
+        <div style="flex:12;background:var(--mist)">Wearstler</div>
+        <div style="flex:10;background:var(--lagoon);color:var(--on-dark)">Pottery Barn</div>
+        <div style="flex:10;background:var(--mist)">McGee</div>
+        <div style="flex:10;background:var(--lagoon);color:var(--on-dark)">Ken Fulk</div>
+        <div style="flex:9;background:var(--mist)">Calderone</div>
+        <div style="flex:9;background:var(--lagoon);color:var(--on-dark)">Shamshiri</div>
+        <div style="flex:8;background:var(--mist)">RL Home</div>
+        <div style="flex:8;background:var(--lagoon);color:var(--on-dark)">Arhaus</div>
+        <div style="flex:8;background:var(--mist)">Amber</div>
+      </div>
+
+      <div class="bench" style="margin-top:48px">
+        <div class="bm"><span class="bm__w">16<small>%</small></span><div class="bm__name">Restoration Hardware <span>Retail</span></div><div class="bm__bar"><i style="width:100%"></i></div>
+          <p><b>Took:</b> stacked full-bleed 16:9 panels, frontal gallery-lit rooms, the warm paper ground, a list of locations served, and its Sourcebook as the printed Portfolio. <b>Avoided:</b> hairline white type over photos, which fails contrast.</p></div>
+        <div class="bm"><span class="bm__w">12<small>%</small></span><div class="bm__name">Kelly Wearstler <span>Studio</span></div><div class="bm__bar"><i style="width:75%"></i></div>
+          <p><b>Took:</b> a serif set very tight at huge sizes, and a spec block on every project (location, type, recognition, collaborators).</p></div>
+        <div class="bm"><span class="bm__w">10<small>%</small></span><div class="bm__name">Pottery Barn <span>Retail</span></div><div class="bm__bar"><i style="width:62%"></i></div>
+          <p><b>Took:</b> the small italic tagline under the hero, wide-tracked caps for labels, warm lived-in styling for the Journal, and an easy-to-find design-services path. <b>Avoided:</b> promotions, “free design,” pop-ups, baked-in headlines.</p></div>
+        <div class="bm"><span class="bm__w">10<small>%</small></span><div class="bm__name">Studio McGee <span>Studio</span></div><div class="bm__bar"><i style="width:62%"></i></div>
+          <p><b>Took:</b> a process told in numbered phases, a stated reply time, a multi-step inquiry that asks which projects resonate, and an inspiration-link field.</p></div>
+        <div class="bm"><span class="bm__w">10<small>%</small></span><div class="bm__name">Ken Fulk <span>Studio</span></div><div class="bm__bar"><i style="width:62%"></i></div>
+          <p><b>Took:</b> the filterable project index with hover previews, theatrical case studies, and permission to have a sense of humor.</p></div>
+        <div class="bm"><span class="bm__w">9<small>%</small></span><div class="bm__name">Athena Calderone <span>Studio</span></div><div class="bm__bar"><i style="width:56%"></i></div>
+          <p><b>Took:</b> a stone-and-paper palette, restraint in how many projects are shown, and full credits on every project.</p></div>
+        <div class="bm"><span class="bm__w">9<small>%</small></span><div class="bm__name">Studio Shamshiri <span>Studio</span></div><div class="bm__bar"><i style="width:56%"></i></div>
+          <p><b>Took:</b> the confidence to open on one image and a name. No carousel, no pop-up, no explaining.</p></div>
+        <div class="bm"><span class="bm__w">8<small>%</small></span><div class="bm__name">Ralph Lauren Home <span>Retail</span></div><div class="bm__bar"><i style="width:50%"></i></div>
+          <p><b>Took:</b> a heritage serif paired with a disciplined grotesque, a single deep material accent (bronze here, brass there), and storytelling over selling.</p></div>
+        <div class="bm"><span class="bm__w">8<small>%</small></span><div class="bm__name">Arhaus <span>Retail</span></div><div class="bm__bar"><i style="width:50%"></i></div>
+          <p><b>Took:</b> showing the designer at work (the Journal’s studio imagery) and italic serif for captions and emphasis.</p></div>
+        <div class="bm"><span class="bm__w">8<small>%</small></span><div class="bm__name">Amber Interiors <span>Studio</span></div><div class="bm__bar"><i style="width:50%"></i></div>
+          <p><b>Took:</b> asking construction and furnishings budgets separately, and italicizing one key word per headline. Jake Arnold’s archived site, now offline, also informed the architect question.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- System -->
+  <section class="section" id="system">
+    <div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">03 · Design system</p><h2 class="h2">Sarasota Modern</h2></div>
+        <p class="italic-note" style="max-width:38ch;margin:0">The v2 direction nods to the Sarasota School of mid-century architecture: bone paper, lagoon water, one hit of sun. The teal comes from the phone-booth nook in Aubrey’s own studio.</p></div>
+      <div class="swatches">
+        <div><div class="sw__chip" style="background:var(--paper)"></div><div class="sw__name">Paper</div><div class="sw__hex">#F3F1EC</div><div class="sw__use">Ground for every page</div></div>
+        <div><div class="sw__chip" style="background:var(--bone)"></div><div class="sw__name">Bone</div><div class="sw__hex">#E7E3DA</div><div class="sw__use">Process, notes</div></div>
+        <div><div class="sw__chip" style="background:var(--mist)"></div><div class="sw__name">Mist</div><div class="sw__hex">#D7E2E0</div><div class="sw__use">From AOB’s current pale blue</div></div>
+        <div><div class="sw__chip" style="background:var(--lagoon)"></div><div class="sw__name">Lagoon</div><div class="sw__hex">#1D4744</div><div class="sw__use">Signature blocks, mobile menu</div></div>
+        <div><div class="sw__chip" style="background:var(--sun)"></div><div class="sw__name">Sun</div><div class="sw__hex">#E2A93B</div><div class="sw__use">Award sticker, hidden detail, hovers</div></div>
+        <div><div class="sw__chip" style="background:var(--ink)"></div><div class="sw__name">Ink</div><div class="sw__hex">#161514</div><div class="sw__use">Text, inquiry, footer</div></div>
+      </div>
+      <div class="type-spec">
+        <div><p class="eyebrow">Display · Freight Big Pro Light</p><p class="sample display" style="font-size:80px">O’Brien</p><p class="body" style="font-size:15px">Headlines, project names and the name itself. A high-contrast face drawn for large sizes, in the same register as RH and Ralph Lauren Home.</p></div>
+        <div><p class="eyebrow">Captions · Freight Text Pro Italic</p><p class="sample" style="font:italic 400 24px/1.3 var(--serif);margin:18px 0 14px">The sunken lounge, gathered around a suspended fireplace.</p><p class="body" style="font-size:15px">Captions, credits and notes. Freight’s text cut, so it sits naturally with the display face.</p></div>
+        <div><p class="eyebrow">Body &amp; labels · Neue Haas Unica</p><p class="sample" style="font:300 22px/1.4 var(--sans);margin:18px 0 14px">Materials chosen for how they age.</p><p class="body" style="font-size:15px">Body at 17px Light; labels in Medium caps, tracked wide. A refined Helvetica descendant, quieter than a geometric sans.</p></div>
+      </div>
+      <div class="sitemap" style="margin-top:clamp(56px,7vw,96px)">
+        <div><h3 class="h3">Header</h3><ul><li>Light over the hero, paper once scrolled</li><li>Full-screen lagoon menu on mobile</li></ul></div>
+        <div><h3 class="h3">Motion</h3><ul><li>Images wipe up into frame</li><li>Slow location ticker</li><li>Nothing else moves</li></ul></div>
+        <div><h3 class="h3">Moments</h3><ul><li>Award seal on Autocamp</li><li>Cursor preview on the index</li><li>Live Sarasota studio clock</li></ul></div>
+        <div><h3 class="h3">The hidden detail</h3><ul><li>A brand idea from her Disney training</li><li>One clickable easter egg on the homepage</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sitemap -->
+  <section class="section section--stone section--tight">
+    <div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">04 · Architecture</p><h2 class="h2">New <em>sitemap</em></h2></div></div>
+      <div class="sitemap">
+        <div><h3 class="h3">Work</h3><ul><li>Index, filterable</li><li>Six case studies with clean URLs, e.g. /work/autocamp-cape-cod</li></ul></div>
+        <div><h3 class="h3">Studio</h3><ul><li>About Aubrey</li><li>Services</li><li>Process</li></ul></div>
+        <div><h3 class="h3">Press &amp; Journal</h3><ul><li>Press, linked to articles</li><li>Journal entries</li><li>Portfolio request</li></ul></div>
+        <div><h3 class="h3">Inquire</h3><ul><li>Four-step inquiry</li><li>Privacy and Accessibility, rewritten</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Needs -->
+  <section class="section">
+    <div class="wrap" style="max-width:980px">
+      <div class="section-head"><div><p class="eyebrow">05 · To launch</p><h2 class="h2">What we need <em>from the studio</em></h2></div></div>
+      <ol class="needs">
+        <li><span><b>Original high-resolution photography</b> for St. Regis, the Golf Lounge, Martha’s Vineyard and the Greenwich home. The current site only has 650–1,000px screenshots of these, many of them renderings.</span></li>
+        <li><span><b>Two or three client testimonials</b>, approved for use. The site has none today.</span></li>
+        <li><span><b>Press links and dates</b> for the WSJ, LUXE, Interior Design and Florida Design features, plus magazine covers if available.</span></li>
+        <li><span><b>Project facts</b>: year, size, scope, architect, builder and photographer for each case study.</span></li>
+        <li><span><b>Sign-off on proposed copy</b>: service descriptions, process phases and durations, budget ranges in the inquiry form, Journal topics and the “hidden detail” promise are drafts. Confirm she wants to make that promise before it goes live.</span></li>
+        <li><span><b>Instagram handle and phone line</b>, if the studio wants them public.</span></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="margin-top:0">
+      <span>Redesign concept for Aubrey O’Brien, Inc.</span>
+      <nav aria-label="Pages"><a href="index.html">Homepage</a><a href="autocamp-cape-cod.html">Case study</a></nav>
+    </div>
+  </div>
+</footer>
+<script src="assets/site.js"></script>
+</body>
+</html>
